@@ -1,0 +1,14 @@
+{% load blog_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block header %}
+    {% endblock %}
+</head>
+<body>
+{% load_nav_info %}
+{% block content %}
+{% endblock %}
+</body>
+</html>

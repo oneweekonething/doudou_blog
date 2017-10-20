@@ -1,0 +1,12 @@
+{% extends 'share_layout/base.html' %}
+{% block header %}
+    <title>index</title>
+{% endblock %}
+{% block content %}
+
+    {% for article in article_list %}
+        {{ article.body }}
+    {% endfor %}
+
+
+{% endblock %}

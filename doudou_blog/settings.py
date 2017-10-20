@@ -24,9 +24,7 @@ SECRET_KEY = ')9py7am-7*(5((2f=4=0mvs*=5)s-mi3fa97wjb0zkaf-ku86q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-# Application definition
+ALLOWED_HOSTS = ['www.oneweekonething.com', '127.0.0.1', 'example.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -57,7 +55,7 @@ ROOT_URLCONF = 'doudou_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +116,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'accounts.BlogUser'
+# 分页
+PAGINATE_BY = 10
+
+
+SITE_ID = 1
