@@ -1,14 +1,16 @@
-{% load blog_tags %}
 {% load static %}
+{% load blog_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" id='twentytwelve-style-css' href="{% static 'blog/css/style.css' %}" type="text/css"
-          media="all"/>
 
     {% block header %}
     {% endblock %}
+
+    <link rel="stylesheet" id='twentytwelve-style-css' href="{% static 'blog/css/style.css' %}" type="text/css"
+          media="all"/>
+
 </head>
 <body>
 {% load_nav_info %}

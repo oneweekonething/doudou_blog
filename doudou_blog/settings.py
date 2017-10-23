@@ -119,5 +119,6 @@ AUTH_USER_MODEL = 'accounts.BlogUser'
 # 分页
 PAGINATE_BY = 10
 
-
 SITE_ID = 1
+ARTICLE_SUB_LENGTH = 300
+DATE_TIME_FORMAT = '%Y-%m-%d'

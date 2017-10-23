@@ -1,11 +1,12 @@
 {% extends 'share_layout/base.html' %}
+{% load blog_tags %}
 {% block header %}
     <title>index</title>
 {% endblock %}
 {% block content %}
 
     {% for article in article_list %}
-        {{ article.body }}
+        {% load_article_detail article True user %}
     {% endfor %}
 
 

@@ -1,0 +1,37 @@
+{% load blog_tags %}
+<article id="post-{{ article.pk }}">
+    <header class="entry-header">
+        <h1 class="entry-title">
+            {% if isindex %}
+                <a href="{{ article.get_absolute_url }}" rel="bookmark">
+                    {{ article.title }}
+                </a>
+            {% else %}
+                {{ article.title }}
+            {% endif %}
+        </h1>
+        <div class="comments-link">
+            {% if article.comment_status == "o" %}
+                <a href="{{ article.get_absolute_url }}#comments" rel="nofollow">
+                    {% if article.comment and article.comment_set.count %}
+                        {{ article.comment_set.count }}个评论
+                    {% else %}
+                        发表评论
+                    {% endif %}
+                </a>
+
+            {% endif %}
+            <div style="float: right">
+                {{ article.views }} views
+            </div>
+        </div>
+        <br/>
+    </header>
+    {% if isindex %}
+        {{ article.body|truncatechars_content|custom_markdown }}
+        <p class="read-more"><a href="{{ article.get_absolute_url }}">Read more</a></p>
+    {% else %}
+        {{ article.body|custom_markdown }}
+    {% endif %}
+    {% load_article_metas article user %}
+</article>

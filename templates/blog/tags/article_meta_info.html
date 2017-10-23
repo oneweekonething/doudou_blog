@@ -1,0 +1,10 @@
+{% load blog_tags %}
+<footer>
+    本条发布于<a>
+    <time class="entry-date updated"
+          datetime="{{ article.created_time }}">
+        {% datetimeformat article.created_time %}</time>
+
+</a>
+
+</footer>
