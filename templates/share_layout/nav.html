@@ -1,6 +1,7 @@
-<nav>
-    <ul>
-        <li>首页</li>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+
+    <ul class="nav-menu">
+        <li id="menu-item-3498"><a href="">首页</a></li>
         {% load blog_tags %}
         {% query nav_category_list parent_category=None as root_categorys %}
         {% for node in root_categorys %}
