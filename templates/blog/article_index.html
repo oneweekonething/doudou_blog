@@ -4,10 +4,10 @@
     <title>index</title>
 {% endblock %}
 {% block content %}
+    <div id="primary" class="site">
+        {% for article in article_list %}
+            {% load_article_detail article True user %}
+        {% endfor %}
 
-    {% for article in article_list %}
-        {% load_article_detail article True user %}
-    {% endfor %}
-
-
+    </div>
 {% endblock %}

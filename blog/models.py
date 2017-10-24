@@ -72,6 +72,10 @@ class Article(BaseModel):
             'day': self.created_time.day
         })
 
+    def get_admin_url(self):
+        info = (self._meta.app_label, self._meta.model_name)
+        return reverse('admin:%s_%s_change' % info, args=(self.pk,))
+
 
 class Category(BaseModel):
     """文章分类"""

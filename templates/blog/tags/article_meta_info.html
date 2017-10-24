@@ -4,7 +4,26 @@
     <time class="entry-date updated"
           datetime="{{ article.created_time }}">
         {% datetimeformat article.created_time %}</time>
-
 </a>
+
+    {% if article.type == 'a' %}
+        。属于{{ article.category.name }}
+    {% endif %}
+    {% if article.tags.all %}
+        被贴了
+        {% for t in article.tags.all %}
+            {{ t.name }}
+            {% if t != article.tags.all.last %}
+                ,
+            {% endif %}
+        {% endfor %}
+        标签
+    {% endif %}
+    <span>作者是
+        {{ article.author.username }}
+        {% if user.is_authenticated %}
+            <a href="{{ article.get_admin_url }}">编辑</a>
+        {% endif %}
+    </span>
 
 </footer>

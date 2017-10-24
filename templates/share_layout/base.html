@@ -14,7 +14,13 @@
 </head>
 <body>
 {% load_nav_info %}
-{% block content %}
-{% endblock %}
+<div id="page" class="hfeed site">
+    <div id="main" class="wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% include 'share_layout/footer.html' %}
+</div>
+
 </body>
 </html>
