@@ -65,6 +65,16 @@ p {
     content: "";
 }
 
+.nav-previous {
+    float: left;
+    width: 50%;
+}
+
+.nav-next {
+    float: right;
+    width: 50%;
+}
+
 @media screen and (min-width: 600px) {
 
     body .site {
@@ -136,6 +146,16 @@ p {
         max-width: 960px;
         max-width: 68.571428571rem;
         overflow: hidden;
+    }
+
+    .nav-previous {
+        float: left;
+        width: 50%;
+    }
+
+    .nav-next {
+        float: right;
+        width: 50%;
     }
 
 }

@@ -64,6 +64,10 @@ class Article(BaseModel):
         verbose_name_plural = verbose_name
         get_latest_by = 'created_time'
 
+    def viewed(self):
+        self.views += 1
+        self.save(update_fields=['views'])
+
     def get_absolute_url(self):
         return reverse('blog:detailbyid', kwargs={
             'article_id': self.id,
@@ -75,6 +79,12 @@ class Article(BaseModel):
     def get_admin_url(self):
         info = (self._meta.app_label, self._meta.model_name)
         return reverse('admin:%s_%s_change' % info, args=(self.pk,))
+
+    def next_article(self):
+        return Article.objects.filter(id__gt=self.id, status='p').order_by('id').first()
+
+    def prev_article(self):
+        return Article.objects.filter(id__lt=self.id, status='p').first()
 
 
 class Category(BaseModel):

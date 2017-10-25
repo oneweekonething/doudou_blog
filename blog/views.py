@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.conf import settings
 from doudou_blog.utils import cache, logger
 from blog.models import Article
@@ -64,3 +65,21 @@ class IndexView(ArticleListView):
     def get_queryset_cache_key(self):
         cache_key = 'index_{page}'.format(page=self.page_number)
         return cache_key
+
+
+class ArticleDetailView(DetailView):
+    template_name = 'blog/article_detail.html'
+    model = Article
+    pk_url_kwarg = 'article_id'
+    context_object_name = 'article'
+
+    def get_object(self):
+        obj = super(ArticleDetailView, self).get_object()
+        obj.viewed()
+        self.object = obj
+        return obj
+
+    def get_context_data(self, **kwargs):
+        kwargs['next_article'] = self.object.next_article
+        kwargs['prev_article'] = self.object.prev_article
+        return super(ArticleDetailView, self).get_context_data(**kwargs)

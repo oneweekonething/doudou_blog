@@ -1,0 +1,27 @@
+{% extends 'share_layout/base.html' %}
+{% load blog_tags %}
+{% block header %}
+    <title>{{ article.title }}</title>
+{% endblock %}
+{% block content %}
+    {% load_article_detail article False user %}
+    {% if article.type == 'a' %}
+        <nav>
+
+            {% if prev_article %}
+                <span class="nav-previous">
+                <a href="{{ prev_article.get_absolute_url }}" rel="next">
+                    {{ prev_article.title }}
+                </a>
+                </span>
+            {% endif %}
+            {% if next_article %}
+                <span class="nav-next">
+                <a href="{{ next_article.get_absolute_url }}" rel="prev">
+                    {{ next_article.title }}
+                </a>
+                </span>
+            {% endif %}
+        </nav>
+    {% endif %}
+{% endblock %}
