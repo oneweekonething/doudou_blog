@@ -1,0 +1,48 @@
+<div id="comments">
+    <div id="respond">
+        <h3 id="reply-title" class="comment-reply-title">发表评论
+            <small><a rel="nofollow" id="cancel-comment-reply-link" href="/wordpress/?p=3786#respond"
+                      style="display:none;">取消回复</a></small>
+        </h3>
+
+        <form action="" method="post" id="commentform">
+            {% csrf_token %}
+            <p>
+                {{ form.body.label_tag }}
+
+                {{ form.body }}
+                {{ form.body.errors }}
+            </p>
+
+            <p >
+                {% if not form.name.is_hidden %}
+                    {{ form.name.label_tag }}
+                {% endif %}
+                {{ form.name }}
+                {{ form.name.errors }}
+                {% comment %}<label for="author">姓名 <span class="required">*</span></label>
+                <input id="author" name="author" type="text" value="" size="30" maxlength="245" aria-required='true'
+                       required='required'/></p>{% endcomment %}
+
+            <p class="comment-form-email">
+                {% comment %}    <label for="email">电子邮件 <span class="required">*</span></label> <input
+                    id="email" name="email" type="text" value="" size="30" maxlength="100"
+                    aria-describedby="email-notes" aria-required='true' required='required'/>{% endcomment %}
+                {% if not form.email.is_hidden %}
+                    {{ form.email.label_tag }}
+                {% endif %}
+                {{ form.email }}
+                {{ form.email.errors }}
+            </p>
+            {% comment %}<p class="comment-form-url">
+                {{ form.url.label_tag }}
+                {{ form.url }}
+                {{ form.url.errors }}
+
+            </p>{% endcomment %}
+            {{ form.parent_comment_id }}
+        </form>
+
+    </div>
+
+</div>

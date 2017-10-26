@@ -24,4 +24,19 @@
             {% endif %}
         </nav>
     {% endif %}
+
+    {% if article.comment_status == "o" %}
+        {% include 'comments/tags/comment_list.html' %}
+        {% if user.is_authenticated %}
+            {% include 'comments/tags/post_comment.html' %}
+        {% else %}
+            <h3>您还没有登陆,请您<a>登陆</a>后发表评论。
+
+            </h3>
+
+        {% endif %}
+
+    {% endif %}
+
+
 {% endblock %}

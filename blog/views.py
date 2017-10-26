@@ -4,6 +4,8 @@ from django.views.generic.detail import DetailView
 from django.conf import settings
 from doudou_blog.utils import cache, logger
 from blog.models import Article
+from comments.forms import CommentForm
+from django import forms
 
 
 # Create your views here.
@@ -80,6 +82,24 @@ class ArticleDetailView(DetailView):
         return obj
 
     def get_context_data(self, **kwargs):
+        comment_form = CommentForm()
+        user = self.request.user
+
+        if user.is_authenticated and not user.is_anonymous and user.email and user.username:
+            comment_form.fields.update({
+                'email': forms.CharField(widget=forms.HiddenInput()),
+                'name': forms.CharField(widget=forms.HiddenInput()),
+            })
+            comment_form.fields["email"].initial = user.email
+            comment_form.fields["name"].initial = user.username
+
+        article_comments = self.object.comment_list()
+
+        kwargs['form'] = comment_form
+
+        article_comments = self.object.comment_list()
+        kwargs['article_comments'] = article_comments
+        kwargs['comment_count'] = len(article_comments) if article_comments else 0
         kwargs['next_article'] = self.object.next_article
         kwargs['prev_article'] = self.object.prev_article
         return super(ArticleDetailView, self).get_context_data(**kwargs)

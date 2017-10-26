@@ -3,6 +3,7 @@ from uuslug import slugify
 from django.contrib.sites.models import Site
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from doudou_blog.utils import cache
 
 
 # 参考各类参数涵义:http://blog.csdn.net/devil_2009/article/details/41735611
@@ -75,6 +76,16 @@ class Article(BaseModel):
             'month': self.created_time.month,
             'day': self.created_time.day
         })
+
+    def comment_list(self):
+        cache_key = 'article_comment_{id}'.format(id=self.id)
+        value = cache.get(cache_key)
+        if value:
+            return value
+        else:
+            comments = self.comment_set.all()
+            cache.set(cache_key, comments)
+            return comments
 
     def get_admin_url(self):
         info = (self._meta.app_label, self._meta.model_name)

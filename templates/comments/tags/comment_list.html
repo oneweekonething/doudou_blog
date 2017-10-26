@@ -1,0 +1,22 @@
+<section id="comments">
+    {% load blog_tags %}
+    <ul>
+        <li>
+            <a href="#commentlist-container">
+                <i></i>评论<span>{{ comment_count }}</span>
+
+            </a>
+        </li>
+    </ul>
+
+    {% if article_comments %}
+        <div id="commentlist-container">
+            <ol>
+
+            </ol>
+
+        </div>
+
+    {% endif %}
+
+</section>
