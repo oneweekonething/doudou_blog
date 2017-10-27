@@ -7,7 +7,7 @@ function do_reply(parentid) {
     $("#id_parent_comment_id").val(parentid)
     $("#commentform").appendTo($("#div-comment-"+parentid))
     $("#reply-title").hide()
-    $("#cancel-comment").show()
+    $("#cancel_comment").show()
 
 }
 
