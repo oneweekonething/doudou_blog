@@ -1,5 +1,6 @@
 <section id="comments">
     {% load blog_tags %}
+    {% load comment_tags %}
     <ul>
         <li>
             <a href="#commentlist-container">
@@ -12,6 +13,10 @@
     {% if article_comments %}
         <div id="commentlist-container">
             <ol>
+                {% query article_comments parent_comment=None as parent_comments %}
+                {% for comment in parent_comments %}
+                    {% show_comment_item comment False %}
+                {% endfor %}
 
             </ol>
 

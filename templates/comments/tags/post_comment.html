@@ -5,7 +5,7 @@
                       style="display:none;">取消回复</a></small>
         </h3>
 
-        <form action="" method="post" id="commentform">
+        <form action="{% url 'comments:postcomment' article.pk %}" method="post" id="commentform">
             {% csrf_token %}
             <p>
                 {{ form.body.label_tag }}
@@ -14,7 +14,7 @@
                 {{ form.body.errors }}
             </p>
 
-            <p >
+            <p>
                 {% if not form.name.is_hidden %}
                     {{ form.name.label_tag }}
                 {% endif %}
@@ -41,6 +41,12 @@
 
             </p>{% endcomment %}
             {{ form.parent_comment_id }}
+            <p>
+                <input name="submit" type="submit" id="submit" value="发表评论">
+                <small id="cancel-comment" style="display: none">
+                    <a href="javascript:void(0)" id="cancel-comment-reply-link" onclick="cancel_reply()">取消回复</a>
+                </small>
+            </p>
         </form>
 
     </div>

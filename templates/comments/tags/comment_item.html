@@ -1,0 +1,14 @@
+{% load blog_tags %}
+<li id="comment-{{ comment_item.pk }}">
+    <div id="div-comment-{{ comment_item.pk }}">
+        <div>
+            {{ comment_item.created_time }}
+        </div>
+        <p>{{ comment_item.body }}</p>
+    </div>
+    <div class="reply"><a rel="nofollow" class="comment-reply-link"
+                          href="javascript:void(0)"
+                          onclick="do_reply({{ comment_item.pk }})"
+                          aria-label="回复给{{ comment_item.author.username }}">回复</a></div>
+
+</li>
