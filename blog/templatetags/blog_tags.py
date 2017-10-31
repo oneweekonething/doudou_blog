@@ -6,6 +6,7 @@ from blog.models import Category
 from django.template.defaultfilters import stringfilter
 from django.conf import settings
 from django.utils.safestring import mark_safe
+from blog.models import Article
 
 register = template.Library()
 
@@ -72,9 +73,28 @@ def custom_markdown(content):
     from doudou_blog.utils import CommonMarkdown
     return mark_safe(CommonMarkdown.get_markdown(content))
 
+
 @register.simple_tag
 def datetimeformat(data):
     try:
         return data.strftime(settings.DATE_TIME_FORMAT)
     except:
         return ""
+
+
+@register.inclusion_tag('blog/tags/sidebar.html')
+def load_sidebar(user):
+    """
+    加载侧边栏
+    :param user:
+    :return:
+    """
+    recent_articles = Article.objects.filter(status='p')[:settings.SIDEBAR_ARTICLE_COUNT]
+    sidebar_categorys = Category.objects.all()
+    most_read_articles = Article.objects.filter(status='p').order_by('-views')[:settings.SIDEBAR_ARTICLE_COUNT]
+
+    return {
+        'recent_articles': recent_articles,
+        'sidebar_categorys': sidebar_categorys,
+        'most_read_articles': most_read_articles
+    }

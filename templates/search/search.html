@@ -1,0 +1,20 @@
+{% extends 'share_layout/base.html' %}
+{% load blog_tags %}
+{% block content %}
+    {% if query %}
+        <header>
+            <h2>搜索<span style="color: red">{{ query }}</span></h2>
+        </header>
+        {% if query and page.object_list %}
+            {% for article in page.object_list %}
+                {% load_article_detail article.object True user %}
+            {% endfor %}
+        {% else %}
+            <h1 class="archive-title">哎呀，关键字：<span>{{ query }}</span>没有找到结果，要不换个词再试试？</h1>
+        {% endif %}
+
+    {% endif %}
+{% endblock %}
+{% block sidebar %}
+    {% load_sidebar request.user %}
+{% endblock %}

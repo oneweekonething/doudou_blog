@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'haystack',
     'pagedown',
     'blog',
     'accounts',
@@ -99,6 +100,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
+# 自动更新搜索索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -123,3 +133,5 @@ PAGINATE_BY = 10
 SITE_ID = 1
 ARTICLE_SUB_LENGTH = 300
 DATE_TIME_FORMAT = '%Y-%m-%d'
+# 侧边栏文章数目
+SIDEBAR_ARTICLE_COUNT = 10
