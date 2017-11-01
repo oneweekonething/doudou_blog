@@ -4,7 +4,7 @@
     <title>index</title>
 {% endblock %}
 {% block content %}
-    <div id="primary" class="site">
+    <div id="primary" class="site-content">
         {% for article in article_list %}
             {% load_article_detail article True user %}
         {% endfor %}

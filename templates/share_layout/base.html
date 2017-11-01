@@ -19,9 +19,10 @@
     <div id="main" class="wrapper">
         {% block content %}
         {% endblock %}
+        {% block sidebar %}
+        {% endblock %}
     </div>
-    {% block sidebar %}
-    {% endblock %}
+
     {% include 'share_layout/footer.html' %}
 </div>
 

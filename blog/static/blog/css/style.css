@@ -1,3 +1,11 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
 p {
     margin: 0;
     padding: 0;
@@ -53,6 +61,23 @@ p {
 .site-content {
     margin: 24px 0 0;
     margin: 1.714285714rem 0 0;
+}
+
+/* Footer */
+footer[role="contentinfo"] {
+    border-top: 1px solid #ededed;
+    clear: both;
+    font-size: 12px;
+    font-size: 0.857142857rem;
+    line-height: 2;
+    max-width: 960px;
+    max-width: 68.571428571rem;
+    margin-top: 24px;
+    margin-top: 1.714285714rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 24px 0;
+    padding: 1.714285714rem 0;
 }
 
 .clear:before,
@@ -131,14 +156,19 @@ p {
         font-size: 1.571428571rem;
     }
 
+    .wrapper {
+        border-top: none;
+        box-shadow: none;
+    }
+
     .site-content {
         float: left;
         width: 65.104166667%;
     }
 
-    .site-content {
-        margin: 0;
-        width: auto;
+    .widget-area {
+        float: right;
+        width: 26.041666667%;
     }
 
     .site {
