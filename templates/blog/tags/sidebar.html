@@ -5,5 +5,75 @@
         <input type="text" value="" name="q" id="q">
         <input type="submit" id="searchsubmit" value="搜索">
     </form>
+    {% if most_read_articles %}
+        <aside>
+            <h3>Views</h3>
+            <ul>
+                {% for a in most_read_articles %}
+                    <li>
+                        <a href="{{ a.get_absolute_url }}" title="{{ a.title }}">
+                            {{ a.title }}
+                        </a> - {{ a.views }} views
 
+                    </li>
+                {% endfor %}
+            </ul>
+
+
+        </aside>
+
+    {% endif %}
+
+    {% if sidebar_categorys %}
+        <aside id="su_siloed_terms-2" class="widget widget_su_siloed_terms"><h3 class="widget-title">分类目录</h3>
+            <ul>
+                {% for c in sidebar_categorys %}
+                    <li class="cat-item cat-item-184"><a href={{ c.get_absolute_url }}>{{ c.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+    {% endif %}
+    {% if sidebar_comments %}
+        <aside>
+            <ul>
+                {% for c in sidebar_comments %}
+                    <li class="recentcomments">
+                <span class="comment-author-link">
+                    {{ c.author.username }}</span>
+                        发表在《
+                        <a href="{{ c.article.get_absolute_url }}">{{ c.article.title }}</a>》
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </aside>
+
+    {% endif %}
+    {% if recent_articles %}
+        <aside id="recent-posts-2" class="widget widget_recent_entries"><h3 class="widget-title">近期文章</h3>
+            <ul>
+
+                {% for a in  recent_articles %}
+                    <li><a href="{{ a.get_absolute_url }}" title="{{ a.title }}">
+                        {{ a.title }}
+                    </a></li>
+                {% endfor %}
+            </ul>
+        </aside>
+    {% endif %}
+
+  <aside id="meta-2" class="widget widget_meta"><h3 class="widget-title">功能</h3>
+        <ul>
+            <li><a href="{{ SITE_BASE_URL }}/admin/">管理站点</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="">登出</a>
+                </li>
+
+            {% else %}
+                <li><a href="">登录</a>
+            {% endif %}
+
+        </ul>
+    </aside>
 </div>

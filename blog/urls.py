@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^article/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/(?P<article_id>\d+).html$',
         views.ArticleDetailView.as_view(),
         name='detailbyid'),
+    url(r'^category/(?P<category_name>[\w-]+).html$', views.CategoryDetailView.as_view(), name='category_detail'),
     url(r'^search', include('haystack.urls'), name='search')
 ]

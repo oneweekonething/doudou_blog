@@ -3,9 +3,10 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.conf import settings
 from doudou_blog.utils import cache, logger
-from blog.models import Article
+from blog.models import Article, Category
 from comments.forms import CommentForm
 from django import forms
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -103,3 +104,36 @@ class ArticleDetailView(DetailView):
         kwargs['next_article'] = self.object.next_article
         kwargs['prev_article'] = self.object.prev_article
         return super(ArticleDetailView, self).get_context_data(**kwargs)
+
+
+class CategoryDetailView(ArticleListView):
+    page_type = "分类目录归档"
+
+    def get_queryset_data(self):
+        slug = self.kwargs['category_name']
+        category = get_object_or_404(Category, slug=slug)
+        categoryname = category.name
+
+        self.categoryname = categoryname
+        categorynames = list(map(lambda c: c.name, category.get_sub_categorys()))
+        article_list = Article.objects.filter(category__name__in=categorynames, status='p')
+        return article_list
+
+    def get_queryset_cache_key(self):
+        slug = self.kwargs['category_name']
+        category = get_object_or_404(Category, slug=slug)
+        categoryname = category.name
+        self.categoryname = categoryname
+        cache_key = 'category_list_{categoryname}_{page}'.format(categoryname=categoryname, page=self.page_number)
+        return cache_key
+
+    def get_context_data(self, **kwargs):
+
+        categoryname = self.categoryname
+        try:
+            categoryname = categoryname.split('/')[-1]
+        except:
+            pass
+        kwargs['page_type'] = CategoryDetailView.page_type
+        kwargs['tag_name'] = categoryname
+        return super(CategoryDetailView, self).get_context_data(**kwargs)

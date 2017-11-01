@@ -7,6 +7,7 @@ from django.template.defaultfilters import stringfilter
 from django.conf import settings
 from django.utils.safestring import mark_safe
 from blog.models import Article
+from comments.models import Comment
 
 register = template.Library()
 
@@ -92,9 +93,11 @@ def load_sidebar(user):
     recent_articles = Article.objects.filter(status='p')[:settings.SIDEBAR_ARTICLE_COUNT]
     sidebar_categorys = Category.objects.all()
     most_read_articles = Article.objects.filter(status='p').order_by('-views')[:settings.SIDEBAR_ARTICLE_COUNT]
-
+    commment_list = Comment.objects.order_by('-id')[:settings.SIDEBAR_COMMENT_COUNT]
     return {
+        'user': user,
         'recent_articles': recent_articles,
         'sidebar_categorys': sidebar_categorys,
-        'most_read_articles': most_read_articles
+        'most_read_articles': most_read_articles,
+        'sidebar_comments': commment_list
     }
