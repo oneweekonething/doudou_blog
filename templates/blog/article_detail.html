@@ -4,39 +4,43 @@
     <title>{{ article.title }}</title>
 {% endblock %}
 {% block content %}
-    {% load_article_detail article False user %}
-    {% if article.type == 'a' %}
-        <nav>
+    <div id="primary" class="site-content">
+        {% load_article_detail article False user %}
+        {% if article.type == 'a' %}
+            <nav>
 
-            {% if prev_article %}
-                <span class="nav-previous">
+                {% if prev_article %}
+                    <span class="nav-previous">
                 <a href="{{ prev_article.get_absolute_url }}" rel="next">
                     {{ prev_article.title }}
                 </a>
                 </span>
-            {% endif %}
-            {% if next_article %}
-                <span class="nav-next">
+                {% endif %}
+                {% if next_article %}
+                    <span class="nav-next">
                 <a href="{{ next_article.get_absolute_url }}" rel="prev">
                     {{ next_article.title }}
                 </a>
                 </span>
-            {% endif %}
-        </nav>
-    {% endif %}
-
-    {% if article.comment_status == "o" %}
-        {% include 'comments/tags/comment_list.html' %}
-        {% if user.is_authenticated %}
-            {% include 'comments/tags/post_comment.html' %}
-        {% else %}
-            <h3>您还没有登陆,请您<a>登陆</a>后发表评论。
-
-            </h3>
-
+                {% endif %}
+            </nav>
         {% endif %}
 
-    {% endif %}
+        {% if article.comment_status == "o" %}
+            {% include 'comments/tags/comment_list.html' %}
+            {% if user.is_authenticated %}
+                {% include 'comments/tags/post_comment.html' %}
+            {% else %}
+                <h3>您还没有登陆,请您<a>登陆</a>后发表评论。
 
+                </h3>
 
+            {% endif %}
+
+        {% endif %}
+    </div>
+
+{% endblock %}
+{% block sidebar %}
+    {% load_sidebar user %}
 {% endblock %}

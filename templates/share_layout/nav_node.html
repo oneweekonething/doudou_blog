@@ -1,5 +1,5 @@
 <li>
-    {{ node.name }}
+    <a href="{{ node.get_absolute_url }} ">{{ node.name }}</a>
     {% load blog_tags %}
     {% query nav_category_list parent_category=node as child_categorys %}
     {% if child_categorys %}

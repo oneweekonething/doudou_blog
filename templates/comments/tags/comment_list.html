@@ -16,6 +16,15 @@
                 {% query article_comments parent_comment=None as parent_comments %}
                 {% for comment in parent_comments %}
                     {% show_comment_item comment False %}
+                    {% parse_commenttree article_comments comment as childcomments %}
+                    {% if childcomments %}
+                        <ul>
+                            {% for child in childcomments %}
+                                {% show_comment_item child True %}
+                            {% endfor %}
+
+                        </ul>
+                    {% endif %}
                 {% endfor %}
 
             </ol>

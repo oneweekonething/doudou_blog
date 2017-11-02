@@ -1,0 +1,26 @@
+{% extends 'share_layout/base_account.html' %}
+{% load static %}
+{% block content %}
+    <h2>Sign in with your Account</h2>
+
+    <form action="{% url 'account:login' %}" method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            {{ field }}
+            {{ field.errors }}
+        {% endfor %}
+        <button type="submit">Sign in</button>
+        <label>
+            <input type="checkbox" value="remember-me"> Stay signed in
+        </label>
+
+    </form>
+
+    <p class="text-center">
+        <a href="{% url 'account:register' %}">Create Account</a>
+        |
+        <a href="/">Home Page</a>
+    </p>
+
+{% endblock %}
